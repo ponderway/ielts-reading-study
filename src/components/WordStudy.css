@@ -1,0 +1,284 @@
+.word-study {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #242424;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.word-study h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  background: linear-gradient(90deg, #646cff, #535bf2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.progress-container {
+  margin-bottom: 40px;
+  padding: 20px;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 24px;
+  background-color: #333;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #646cff, #535bf2);
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px rgba(99, 108, 255, 0.5);
+}
+
+.progress-container p {
+  text-align: center;
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 500;
+  color: #e0e0e0;
+}
+
+.word-card {
+  background-color: #1a1a1a;
+  border-radius: 12px;
+  padding: 35px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 1px solid #333;
+  transition: all 0.3s ease;
+}
+
+.word-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.word-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #333;
+}
+
+.word-header h3 {
+  font-size: 2.2rem;
+  margin: 0;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.difficulty {
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.difficulty.easy {
+  background-color: #4caf50;
+  color: white;
+}
+
+.difficulty.medium {
+  background-color: #ff9800;
+  color: white;
+}
+
+.difficulty.hard {
+  background-color: #f44336;
+  color: white;
+}
+
+.definition-toggle {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 25px;
+  background-color: #333;
+  border: 1px solid #444;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.definition-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.definition-toggle:hover::before {
+  left: 100%;
+}
+
+.definition-toggle:hover {
+  background-color: #444;
+  border-color: #646cff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.word-details {
+  margin-bottom: 35px;
+  padding: 20px;
+  background-color: #242424;
+  border-radius: 8px;
+  border-left: 4px solid #646cff;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.definition {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #e0e0e0;
+  font-weight: 500;
+}
+
+.example {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #aaa;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.word-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #333;
+}
+
+.word-navigation button {
+  flex: 1;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.word-navigation button:not(:disabled) {
+  background: linear-gradient(90deg, #646cff, #535bf2);
+  border: none;
+  color: white;
+}
+
+.word-navigation button:not(:disabled):hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(99, 108, 255, 0.4);
+}
+
+.word-navigation button:disabled {
+  background-color: #222;
+  color: #666;
+  cursor: not-allowed;
+  border: 1px solid #333;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .word-study {
+    padding: 15px;
+  }
+
+  .word-card {
+    padding: 25px;
+  }
+
+  .word-header h3 {
+    font-size: 1.8rem;
+  }
+
+  .word-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .difficulty {
+    align-self: flex-start;
+  }
+
+  .word-navigation {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .word-navigation button {
+    padding: 12px;
+  }
+
+  .progress-container {
+    padding: 15px;
+  }
+
+  .word-details {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .word-study h2 {
+    font-size: 1.5rem;
+  }
+
+  .word-card {
+    padding: 20px;
+  }
+
+  .word-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .definition {
+    font-size: 1.1rem;
+  }
+
+  .example {
+    font-size: 1rem;
+  }
+
+  .progress-bar {
+    height: 20px;
+  }
+}
