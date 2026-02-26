@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './WordStudy.css';
 import { storageManager, WordProgress } from '../utils/storage';
-
-interface Word {
-  id: number;
-  word: string;
-  definition: string;
-  example: string;
-  difficulty: 'easy' | 'medium' | 'hard';
-}
+import { mockWords, Word } from '../data/words';
 
 const WordStudy: React.FC = () => {
   const [words, setWords] = useState<Word[]>([]);
@@ -17,45 +10,6 @@ const WordStudy: React.FC = () => {
   const [progress, setProgress] = useState<number[]>([]);
   const [totalWords, setTotalWords] = useState(0);
   const [studiedWords, setStudiedWords] = useState(0);
-
-  // 模拟雅思单词数据
-  const mockWords: Word[] = [
-    {
-      id: 1,
-      word: 'abundant',
-      definition: '丰富的，充裕的',
-      example: 'There is an abundant supply of water in the region.',
-      difficulty: 'medium'
-    },
-    {
-      id: 2,
-      word: 'ambiguous',
-      definition: '模棱两可的，含糊不清的',
-      example: 'The instructions were ambiguous and caused confusion.',
-      difficulty: 'hard'
-    },
-    {
-      id: 3,
-      word: 'benevolent',
-      definition: '仁慈的，慈善的',
-      example: 'The benevolent millionaire donated a large sum to charity.',
-      difficulty: 'medium'
-    },
-    {
-      id: 4,
-      word: 'coherence',
-      definition: '连贯性，一致性',
-      example: 'The essay lacks coherence and is difficult to follow.',
-      difficulty: 'hard'
-    },
-    {
-      id: 5,
-      word: 'diligence',
-      definition: '勤奋，努力',
-      example: 'His success is due to his diligence and hard work.',
-      difficulty: 'easy'
-    }
-  ];
 
   // 从本地存储加载进度
   useEffect(() => {
@@ -130,10 +84,17 @@ const WordStudy: React.FC = () => {
         <div className="word-card">
           <div className="word-header">
             <h3>{currentWord.word}</h3>
-            <span className={`difficulty ${currentWord.difficulty}`}>
-              {currentWord.difficulty === 'easy' ? 'Easy' : 
-               currentWord.difficulty === 'medium' ? 'Medium' : 'Hard'}
-            </span>
+            <div className="word-meta">
+              <span className={`difficulty ${currentWord.difficulty}`}>
+                {currentWord.difficulty === 'easy' ? 'Easy' : 
+                 currentWord.difficulty === 'medium' ? 'Medium' : 'Hard'}
+              </span>
+              {currentWord.frequency && (
+                <span className="frequency">
+                  考频: {'★'.repeat(currentWord.frequency)}{'☆'.repeat(5 - currentWord.frequency)}
+                </span>
+              )}
+            </div>
           </div>
           
           <button 
@@ -147,6 +108,30 @@ const WordStudy: React.FC = () => {
             <div className="word-details">
               <p className="definition">{currentWord.definition}</p>
               <p className="example">Example: {currentWord.example}</p>
+              {currentWord.paraphrases && currentWord.paraphrases.length > 0 && (
+                <div className="paraphrases">
+                  <h4>同义替换:</h4>
+                  <div className="paraphrase-tags">
+                    {currentWord.paraphrases.map((paraphrase, index) => (
+                      <span key={index} className="paraphrase-tag">
+                        {paraphrase}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {currentWord.topics && currentWord.topics.length > 0 && (
+                <div className="topics">
+                  <h4>话题分类:</h4>
+                  <div className="topic-tags">
+                    {currentWord.topics.map((topic, index) => (
+                      <span key={index} className="topic-tag">
+                        {topic}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
