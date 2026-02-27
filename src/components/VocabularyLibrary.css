@@ -22,6 +22,8 @@
   margin-bottom: 30px;
   flex-wrap: wrap;
   gap: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .search-box {
@@ -112,15 +114,19 @@
 
 .library-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 1fr;
   gap: 30px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .words-list {
   background-color: #f8f9fa;
   border-radius: 12px;
-  padding: 25px;
+  padding: 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .words-list h3 {
@@ -129,9 +135,54 @@
   color: #333;
 }
 
+/* 字母导航样式 */
+.letter-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.letter-button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #333;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.letter-button:hover {
+  border-color: #4a6cf7;
+  color: #4a6cf7;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(74, 108, 247, 0.2);
+}
+
+.letter-button.active {
+  border-color: #4a6cf7;
+  background-color: #4a6cf7;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(74, 108, 247, 0.3);
+}
+
 .words-list-container {
   max-height: 600px;
   overflow-y: auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .word-item {
@@ -146,6 +197,10 @@
   justify-content: space-between;
   margin-bottom: 10px;
   gap: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .word-item:hover {
@@ -162,7 +217,7 @@
 
 .word-left {
   flex: 1;
-  min-width: 150px;
+  min-width: 120px;
 }
 
 .word-text {
@@ -205,8 +260,8 @@
 }
 
 .word-right {
-  flex: 2;
-  min-width: 300px;
+  flex: 3;
+  min-width: 250px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -217,7 +272,8 @@
   font-size: 1rem;
   color: #555;
   flex: 1;
-  min-width: 200px;
+  min-width: 180px;
+  word-break: break-word;
 }
 
 .awl-badge {

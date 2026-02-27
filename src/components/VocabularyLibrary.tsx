@@ -13,11 +13,21 @@ const VocabularyLibrary: React.FC = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [totalWords, setTotalWords] = useState(0);
   const [wordsPerPage, setWordsPerPage] = useState(30);
+  const [selectedLetter, setSelectedLetter] = useState<string>('');
+
+  // 生成A-Z字母数组
+  const letters = Array.from({ length: 26 }, (_, i) => String.fromCharCode(65 + i));
+
+  // 处理字母点击
+  const handleLetterClick = (letter: string) => {
+    setSelectedLetter(letter === selectedLetter ? '' : letter);
+    setCurrentPage(1); // 重置到第一页
+  };
 
   // 加载单词数据
   const loadWords = async () => {
     console.log('Loading words...');
-    console.log(`Search term: ${searchTerm}, Filter: ${filter}, Page: ${currentPage}, Page size: ${wordsPerPage}`);
+    console.log(`Search term: ${searchTerm}, Filter: ${filter}, Letter: ${selectedLetter}, Page: ${currentPage}, Page size: ${wordsPerPage}`);
     try {
       console.log('Initializing database...');
       await initDatabase();
@@ -25,7 +35,7 @@ const VocabularyLibrary: React.FC = () => {
       
       // 使用新的getWords函数获取数据
       console.log('Getting words...');
-      const result = await getWords(searchTerm, filter, currentPage, wordsPerPage);
+      const result = await getWords(searchTerm, filter, currentPage, wordsPerPage, selectedLetter);
       console.log(`Got ${result.words.length} words, total: ${result.total}`);
       setWords(result.words);
       setTotalWords(result.total);
@@ -61,7 +71,7 @@ const VocabularyLibrary: React.FC = () => {
   // 加载单词数据
   useEffect(() => {
     loadWords();
-  }, [searchTerm, filter, currentPage, wordsPerPage]);
+  }, [searchTerm, filter, currentPage, wordsPerPage, selectedLetter]);
 
   // 加载选中单词的同义词
   useEffect(() => {
@@ -145,6 +155,20 @@ const VocabularyLibrary: React.FC = () => {
         <div className="library-content">
           <div className="words-list">
             <h3>单词列表</h3>
+            
+            {/* 字母导航 */}
+            <div className="letter-navigation">
+              {letters.map((letter) => (
+                <button
+                  key={letter}
+                  className={`letter-button ${selectedLetter === letter ? 'active' : ''}`}
+                  onClick={() => handleLetterClick(letter)}
+                >
+                  {letter}
+                </button>
+              ))}
+            </div>
+            
             {words.length > 0 ? (
               <div className="words-list-container">
                 {words.map((word) => (

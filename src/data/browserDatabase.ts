@@ -351,7 +351,7 @@ async function initDatabase(force = false) {
 }
 
 // 获取单词列表
-async function getWords(searchTerm: string = '', filter: string = 'all', page: number = 1, pageSize: number = 50): Promise<{ words: Word[], total: number }> {
+async function getWords(searchTerm: string = '', filter: string = 'all', page: number = 1, pageSize: number = 50, letter: string = ''): Promise<{ words: Word[], total: number }> {
   try {
     const db = await openDatabase();
     return new Promise((resolve, reject) => {
@@ -364,6 +364,11 @@ async function getWords(searchTerm: string = '', filter: string = 'all', page: n
       if (searchTerm) {
         // 搜索单词
         const range = IDBKeyRange.bound(searchTerm.toLowerCase(), searchTerm.toLowerCase() + '\uffff');
+        request = index.openCursor(range);
+      } else if (letter) {
+        // 按字母筛选
+        const letterLower = letter.toLowerCase();
+        const range = IDBKeyRange.bound(letterLower, letterLower + '\uffff');
         request = index.openCursor(range);
       } else {
         // 获取所有单词
@@ -381,7 +386,10 @@ async function getWords(searchTerm: string = '', filter: string = 'all', page: n
           if (filter === 'all' || 
               (filter === 'awl' && word.awl_sublist !== null) ||
               (filter === 'high-frequency' && word.frequency > 10)) {
-            words.push(word);
+            // 如果指定了字母，确保单词以该字母开头
+            if (!letter || word.word.toLowerCase().startsWith(letter.toLowerCase())) {
+              words.push(word);
+            }
           }
           cursor.continue();
         } else {
