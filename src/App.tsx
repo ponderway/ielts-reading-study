@@ -4,6 +4,7 @@ import WordStudy from './components/WordStudy';
 import ReadingStudy from './components/ReadingStudy';
 import DeepSearch from './components/DeepSearch';
 import ParaphraseLab from './components/ParaphraseLab';
+import VocabularyLibrary from './components/VocabularyLibrary';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <li><Link to="/reading">Reading Study</Link></li>
               <li><Link to="/search">Deep Search</Link></li>
               <li><Link to="/paraphrase">Paraphrase Lab</Link></li>
+              <li><Link to="/library">Vocabulary Library</Link></li>
             </ul>
           </nav>
         </header>
@@ -28,6 +30,7 @@ function App() {
             <Route path="/reading" element={<ReadingStudy />} />
             <Route path="/search" element={<DeepSearch />} />
             <Route path="/paraphrase" element={<ParaphraseLab />} />
+            <Route path="/library" element={<VocabularyLibrary />} />
           </Routes>
         </main>
         <footer className="app-footer">
