@@ -33,7 +33,7 @@ const WordStudy: React.FC = () => {
       const progressData: WordProgress = {
         studiedWords,
         progress,
-        currentWordId: currentWord.id
+        currentWordId: Number(currentWord.id)
       };
       storageManager.saveWordStudyProgress(progressData);
     }

@@ -30,7 +30,7 @@ function openDatabase(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, DB_VERSION);
 
-    request.onerror = (event) => {
+    request.onerror = (_event) => {
       reject('Error opening database');
     };
 
@@ -123,7 +123,7 @@ async function initSampleData(force = false) {
           resolve(result);
         };
         
-        countRequest.onerror = (event) => {
+        countRequest.onerror = (_event) => {
           reject('Error checking database count');
         };
       });
@@ -147,7 +147,7 @@ async function initSampleData(force = false) {
         // 先获取数据
         const words = await importDataFromJson();
         console.log(`Got ${words.length} words from JSON`);
-        console.log(`First 10 words:`, words.slice(0, 10).map(w => w.word));
+        console.log(`First 10 words:`, words.slice(0, 10).map((w: any) => w.word));
         
         // 然后在事务中添加数据
         await new Promise<void>((resolve, reject) => {
@@ -197,8 +197,8 @@ async function initSampleData(force = false) {
             resolve();
           };
           
-          transaction.onerror = (event) => {
-            console.error('Transaction error:', event);
+          transaction.onerror = (_event) => {
+            console.error('Transaction error:');
             reject('Error adding words to database');
           };
         });
@@ -218,7 +218,7 @@ async function initSampleData(force = false) {
             resolve();
           };
           
-          transaction.onerror = (event) => {
+          transaction.onerror = () => {
             reject('Error adding default sample data');
           };
         });
@@ -395,8 +395,8 @@ async function getWords(searchTerm: string = '', filter: string = 'all', page: n
         }
       };
 
-      request.onerror = (event) => {
-        console.error('Error getting words:', event);
+      request.onerror = (_event) => {
+        console.error('Error getting words:');
         reject('Error getting words');
       };
     });
@@ -419,7 +419,7 @@ async function getWordById(id: number): Promise<Word | null> {
         resolve((event.target as IDBRequest).result as Word | null);
       };
 
-      request.onerror = (event) => {
+      request.onerror = (_event) => {
         reject('Error getting word');
       };
     });
@@ -451,7 +451,7 @@ async function getSynonymsByWordId(wordId: number): Promise<Synonym[]> {
         }
       };
 
-      request.onerror = (event) => {
+      request.onerror = () => {
         reject('Error getting synonyms');
       };
     });
@@ -466,7 +466,10 @@ export {
   initDatabase,
   getWords,
   getWordById,
-  getSynonymsByWordId,
+  getSynonymsByWordId
+};
+
+export type {
   Word,
   Synonym
 };

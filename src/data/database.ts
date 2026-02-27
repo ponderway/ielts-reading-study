@@ -121,7 +121,10 @@ async function initDatabase() {
 // 导出数据库操作函数
 export {
   initDatabase,
-  db,
+  db
+};
+
+export type {
   Word,
   Synonym,
   Topic,

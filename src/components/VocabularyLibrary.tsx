@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './VocabularyLibrary.css';
-import { initDatabase, getWords, getWordById, getSynonymsByWordId, Word, Synonym } from '../data/browserDatabase';
+import { initDatabase, getWords, getSynonymsByWordId, Word, Synonym } from '../data/browserDatabase';
 
 const VocabularyLibrary: React.FC = () => {
   const [words, setWords] = useState<Word[]>([]);

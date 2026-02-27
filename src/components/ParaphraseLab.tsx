@@ -117,7 +117,7 @@ const ParaphraseLab: React.FC = () => {
   };
 
   // 处理句子部分拖拽开始
-  const handleDragStart = (e: React.DragEvent, part: SentencePart) => {
+  const handleDragStart = (_e: React.DragEvent, part: SentencePart) => {
     setDraggedItem(part);
   };
 

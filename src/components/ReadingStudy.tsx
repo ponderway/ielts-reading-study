@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './ReadingStudy.css';
 import { storageManager, ArticleResult } from '../utils/storage';
-import { mockArticles, Article, Question } from '../data/articles';
+import { mockArticles, Article } from '../data/articles';
 
 const ReadingStudy: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
